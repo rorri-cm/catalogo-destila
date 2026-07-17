@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo · Destilación de fragancias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-900:#c8447a;
+    --pink-700:#e35b90;
+    --pink-500:#f0839f;
+    --pink-300:#f6abbf;
+    --pink-200:#facdd8;
+    --pink-100:#fde3e9;
+    --pink-050:#fdf1f4;
+    --cream:#fffaf9;
+    --ink:#5a3242;
+    --ink-soft:#a06f80;
+    --shadow: 0 20px 50px -20px rgba(200,68,122,0.35);
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 0%, var(--pink-100), transparent 40%),
+      radial-gradient(circle at 90% 100%, var(--pink-100), transparent 40%),
+      var(--cream);
+    font-family:'Quicksand', sans-serif;
+    color:var(--ink);
+  }
+
+  img.flower{
+    position:fixed;
+    pointer-events:none;
+    z-index:0;
+    user-select:none;
+  }
+  .flower-top-right{ top:-40px; right:-30px; width:min(260px, 34vw); }
+  .flower-bottom-left{ bottom:-30px; left:-30px; width:min(230px, 30vw); }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width:1120px;
+    margin:0 auto;
+    padding:56px 24px 90px;
+  }
+
+  header{
+    text-align:center;
+    margin-bottom:44px;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--pink-700);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--pink-500);
+    display:inline-block;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(36px, 6vw, 54px);
+    line-height:1.05;
+    margin:0 0 14px;
+    color:var(--pink-900);
+  }
+
+  .subtitle{
+    font-size:16px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 auto;
+  }
+
+  /* Filtros */
+  .filters{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:36px 0 54px;
+  }
+  .filter-btn{
+    border:2px solid var(--pink-200);
+    background:#fff;
+    color:var(--pink-900);
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    padding:10px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .filter-btn:hover{ background:var(--pink-050); }
+  .filter-btn.active{
+    background:var(--pink-700);
+    border-color:var(--pink-700);
+    color:#fff;
+  }
+
+  /* Secciones */
+  .category-section{
+    margin-bottom:60px;
+  }
+  .category-section.hidden{ display:none; }
+
+  .category-title{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(26px, 3.4vw, 34px);
+    color:var(--pink-900);
+    text-align:center;
+    margin:0 0 8px;
+  }
+  .category-line{
+    width:60px; height:3px;
+    background:var(--pink-300);
+    border-radius:3px;
+    margin:0 auto 40px;
+  }
+
+  .subgroup{
+    margin-bottom:38px;
+  }
+  .subgroup-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--pink-700);
+    margin:0 0 18px;
+  }
+  .subgroup-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--pink-200);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:22px;
+  }
+
+  .card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    border:1px solid var(--pink-100);
+    display:flex;
+    flex-direction:column;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 26px 55px -18px rgba(200,68,122,0.45);
+  }
+
+  .card-image{
+    position:relative;
+    aspect-ratio:4/3;
+    background:linear-gradient(135deg, var(--pink-100), var(--pink-200));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .card-image img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .placeholder-icon{
+    width:44px; height:44px;
+    opacity:.55;
+  }
+
+  .badge{
+    position:absolute;
+    top:10px; left:10px;
+    background:rgba(255,255,255,.9);
+    color:var(--pink-900);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:5px 11px;
+    border-radius:999px;
+  }
+
+  .card-body{
+    padding:16px 18px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    flex:1;
+  }
+
+  .card-name{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:19px;
+    color:var(--pink-900);
+    margin:0;
+  }
+
+  .card-desc{
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  .empty-note{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+    background:#fff;
+    border:1px dashed var(--pink-200);
+    border-radius:16px;
+    padding:28px 20px;
+  }
+
+</style>
+</head>
+<body>
+
+<img class="flower flower-top-right" src="arriba_derecha.png" alt="" aria-hidden="true">
+<img class="flower flower-bottom-left" src="abajo_izquierda.png" alt="" aria-hidden="true">
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Catálogo</span>
+    <h1>Nuestros productos</h1>
+    <p class="subtitle">Jabones, perfumes y exfoliantes elaborados con ingredientes químicos y naturales, hechos con dedicación.</p>
+  </header>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="jabones">Jabones</button>
+    <button class="filter-btn" data-filter="perfumes">Perfumes</button>
+    <button class="filter-btn" data-filter="exfoliantes">Exfoliantes</button>
+  </div>
+
+  <!-- JABONES -->
+  <section class="category-section" data-category="jabones">
+    <h2 class="category-title">Jabones</h2>
+    <div class="category-line"></div>
+
+    <div class="subgroup">
+      <p class="subgroup-title">Químicos</p>
+      <div class="grid">
+        <article class="card">
+          <div class="card-image">
+            <img src="jabon-quimico.jpg" alt="Jabón químico" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Químico</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Jabón clásico</h3>
+            <p class="card-desc">Colorante comercial y fragancia comercial.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="subgroup">
+      <p class="subgroup-title">Naturales</p>
+      <div class="grid">
+        <article class="card">
+          <div class="card-image">
+            <img src="jabon-panal.jpg" alt="Jabón panal de abejas" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Natural</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Panal de abejas</h3>
+            <p class="card-desc">Grasa animal, glicerina y extracto de romero, manzanilla y miel.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image">
+            <img src="jabon-hellokitty.jpg" alt="Jabón Hello Kitty" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Natural</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Hello Kitty</h3>
+            <p class="card-desc">Grasa animal, glicerina y extracto de romero, manzanilla y miel.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFUMES -->
+  <section class="category-section" data-category="perfumes">
+    <h2 class="category-title">Perfumes</h2>
+    <div class="category-line"></div>
+
+    <div class="subgroup">
+      <p class="subgroup-title">Químicos</p>
+      <div class="grid">
+        <article class="card">
+          <div class="card-image">
+            <img src="perfume-212.jpg" alt="Perfume 212" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Químico</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">212</h3>
+            <p class="card-desc">Inspirado en la fragancia clásica 212.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image">
+            <img src="perfume-aqua.jpg" alt="Perfume Aqua" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Químico</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Aqua</h3>
+            <p class="card-desc">Aroma fresco y ligero.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image">
+            <img src="perfume-cloud.jpg" alt="Perfume Cloud" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Químico</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Cloud</h3>
+            <p class="card-desc">Dulce y envolvente.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image">
+            <img src="perfume-encargo.jpg" alt="Perfume por encargo" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Por encargo</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Por encargo</h3>
+            <p class="card-desc">Fragancia personalizada según tu preferencia.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="subgroup">
+      <p class="subgroup-title">Naturales</p>
+      <div class="grid">
+        <article class="card">
+          <div class="card-image">
+            <img src="perfume-lavanda.jpg" alt="Perfume de lavanda" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Natural</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Lavanda</h3>
+            <p class="card-desc">Aroma relajante de lavanda natural.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image">
+            <img src="perfume-limon.jpg" alt="Perfume de limón" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Natural</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Limón</h3>
+            <p class="card-desc">Fresco y cítrico, extracto natural de limón.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image">
+            <img src="perfume-rosas.jpg" alt="Perfume de rosas" onerror="this.replaceWith(placeholderIcon())">
+            <span class="badge">Natural</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">Rosas</h3>
+            <p class="card-desc">Floral y delicado, extracto natural de rosas.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXFOLIANTES -->
+  <section class="category-section" data-category="exfoliantes">
+    <h2 class="category-title">Exfoliantes</h2>
+    <div class="category-line"></div>
+    <div class="grid">
+      <article class="card">
+        <div class="card-image">
+          <img src="exfoliante-arroz.jpg" alt="Exfoliante crema de arroz" onerror="this.replaceWith(placeholderIcon())">
+          <span class="badge">Natural</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Crema de arroz</h3>
+          <p class="card-desc">Café, avena y azúcar.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-image">
+          <img src="exfoliante-natura.jpg" alt="Exfoliante crema natura" onerror="this.replaceWith(placeholderIcon())">
+          <span class="badge">Natural</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Crema natural</h3>
+          <p class="card-desc">Café, avena y azúcar.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  function placeholderIcon(){
+    const div = document.createElement('div');
+    div.innerHTML = `<svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:44px;opacity:.55;">
+      <path d="M12 2C12 2 7 8 7 12.5C7 15.5376 9.23858 18 12 18C14.7614 18 17 15.5376 17 12.5C17 8 12 2 12 2Z" stroke="#c8447a" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>`;
+    div.style.width = '100%';
+    div.style.height = '100%';
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'center';
+    return div;
+  }
+
+  document.querySelectorAll('.card-image img').forEach(img=>{
+    img.addEventListener('error', function(){
+      const wrap = document.createElement('div');
+      wrap.style.width = '100%';
+      wrap.style.height = '100%';
+      wrap.style.display = 'flex';
+      wrap.style.alignItems = 'center';
+      wrap.style.justifyContent = 'center';
+      wrap.innerHTML = `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.5;">
+        <path d="M12 2C12 2 7 8 7 12.5C7 15.5376 9.23858 18 12 18C14.7614 18 17 15.5376 17 12.5C17 8 12 2 12 2Z" stroke="#c8447a" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>`;
+      this.replaceWith(wrap);
+    }, { once:true });
+  });
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.category-section');
+
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      sections.forEach(sec=>{
+        if(filter === 'all' || sec.dataset.category === filter){
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
