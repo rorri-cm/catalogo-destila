@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
+  :root {
     --pink-900:#c8447a;
     --pink-700:#e35b90;
     --pink-500:#f0839f;
@@ -22,9 +22,9 @@
     --shadow: 0 20px 50px -20px rgba(200,68,122,0.35);
   }
 
-  *{box-sizing:border-box;}
+  * {box-sizing:border-box;}
 
-  body{
+  body {
     margin:0;
     background:
       radial-gradient(circle at 10% 0%, var(--pink-100), transparent 40%),
@@ -34,16 +34,16 @@
     color:var(--ink);
   }
 
-  img.flower{
+  img.flower {
     position:fixed;
     pointer-events:none;
     z-index:0;
     user-select:none;
   }
-  .flower-top-right{ top:-40px; right:-30px; width:min(260px, 34vw); }
-  .flower-bottom-left{ bottom:-30px; left:-30px; width:min(230px, 30vw); }
+  .flower-top-right { top:-40px; right:-30px; width:min(260px, 34vw); }
+  .flower-bottom-left { bottom:-30px; left:-30px; width:min(230px, 30vw); }
 
-  .wrap{
+  .wrap {
     position:relative;
     z-index:1;
     max-width:1120px;
@@ -51,12 +51,12 @@
     padding:56px 24px 90px;
   }
 
-  header{
+  header {
     text-align:center;
     margin-bottom:44px;
   }
 
-  .eyebrow{
+  .eyebrow {
     display:inline-flex;
     align-items:center;
     gap:8px;
@@ -67,7 +67,7 @@
     font-weight:600;
     margin-bottom:14px;
   }
-  .eyebrow::before{
+  .eyebrow::before {
     content:"";
     width:8px; height:8px;
     border-radius:50%;
@@ -75,7 +75,7 @@
     display:inline-block;
   }
 
-  h1{
+  h1 {
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:500;
@@ -85,7 +85,7 @@
     color:var(--pink-900);
   }
 
-  .subtitle{
+  .subtitle {
     font-size:16px;
     line-height:1.6;
     color:var(--ink-soft);
@@ -93,15 +93,56 @@
     margin:0 auto;
   }
 
+  /* Banner de pedidos / buscar algo diferente */
+  .order-banner {
+    text-align:center;
+    background:linear-gradient(135deg, var(--pink-700), var(--pink-900));
+    border-radius:22px;
+    padding:32px 24px;
+    margin-bottom:30px;
+    box-shadow:var(--shadow);
+  }
+  .order-banner-title {
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:24px;
+    color:#fff;
+    margin:0 0 8px;
+  }
+  .order-banner-text {
+    color:var(--pink-050);
+    font-size:14.5px;
+    max-width:44ch;
+    margin:0 auto 20px;
+    line-height:1.5;
+  }
+  .order-btn {
+    border:none;
+    background:#fff;
+    color:var(--pink-900);
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    padding:13px 30px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:transform .15s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 6px 4px;
+  }
+  .order-btn:hover { transform:translateY(-2px); }
+
   /* Filtros */
-  .filters{
+  .filters {
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
     gap:10px;
     margin:36px 0 54px;
   }
-  .filter-btn{
+  .filter-btn {
     border:2px solid var(--pink-200);
     background:#fff;
     color:var(--pink-900);
@@ -113,20 +154,20 @@
     cursor:pointer;
     transition:background .15s ease, color .15s ease, border-color .15s ease;
   }
-  .filter-btn:hover{ background:var(--pink-050); }
-  .filter-btn.active{
+  .filter-btn:hover { background:var(--pink-050); }
+  .filter-btn.active {
     background:var(--pink-700);
     border-color:var(--pink-700);
     color:#fff;
   }
 
   /* Secciones */
-  .category-section{
+  .category-section {
     margin-bottom:60px;
   }
-  .category-section.hidden{ display:none; }
+  .category-section.hidden { display:none; }
 
-  .category-title{
+  .category-title {
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:500;
@@ -135,17 +176,17 @@
     text-align:center;
     margin:0 0 8px;
   }
-  .category-line{
+  .category-line {
     width:60px; height:3px;
     background:var(--pink-300);
     border-radius:3px;
     margin:0 auto 40px;
   }
 
-  .subgroup{
+  .subgroup {
     margin-bottom:38px;
   }
-  .subgroup-title{
+  .subgroup-title {
     display:flex;
     align-items:center;
     gap:10px;
@@ -156,20 +197,20 @@
     color:var(--pink-700);
     margin:0 0 18px;
   }
-  .subgroup-title::after{
+  .subgroup-title::after {
     content:"";
     flex:1;
     height:1px;
     background:var(--pink-200);
   }
 
-  .grid{
+  .grid {
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
     gap:22px;
   }
 
-  .card{
+  .card {
     background:#fff;
     border-radius:20px;
     overflow:hidden;
@@ -179,12 +220,12 @@
     flex-direction:column;
     transition:transform .2s ease, box-shadow .2s ease;
   }
-  .card:hover{
+  .card:hover {
     transform:translateY(-4px);
     box-shadow:0 26px 55px -18px rgba(200,68,122,0.45);
   }
 
-  .card-image{
+  .card-image {
     position:relative;
     aspect-ratio:4/3;
     background:linear-gradient(135deg, var(--pink-100), var(--pink-200));
@@ -193,17 +234,17 @@
     justify-content:center;
     overflow:hidden;
   }
-  .card-image img{
+  .card-image img {
     width:100%; height:100%;
     object-fit:cover;
     display:block;
   }
-  .placeholder-icon{
+  .placeholder-icon {
     width:44px; height:44px;
     opacity:.55;
   }
 
-  .badge{
+  .badge {
     position:absolute;
     top:10px; left:10px;
     background:rgba(255,255,255,.9);
@@ -216,7 +257,7 @@
     border-radius:999px;
   }
 
-  .card-body{
+  .card-body {
     padding:16px 18px 20px;
     display:flex;
     flex-direction:column;
@@ -224,7 +265,7 @@
     flex:1;
   }
 
-  .card-name{
+  .card-name {
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:600;
@@ -233,14 +274,14 @@
     margin:0;
   }
 
-  .card-desc{
+  .card-desc {
     font-size:13.5px;
     line-height:1.5;
     color:var(--ink-soft);
     margin:0;
   }
 
-  .empty-note{
+  .empty-note {
     text-align:center;
     color:var(--ink-soft);
     font-size:14px;
@@ -248,6 +289,149 @@
     border:1px dashed var(--pink-200);
     border-radius:16px;
     padding:28px 20px;
+  }
+
+  /* Card de "por encargo" con botón propio */
+  .order-card .card-body { gap:10px; }
+  .card-order-btn {
+    border:none;
+    background:var(--pink-700);
+    color:#fff;
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    padding:9px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    align-self:flex-start;
+    margin-top:4px;
+    transition:background .15s ease;
+  }
+  .card-order-btn:hover { background:var(--pink-900); }
+
+  /* Modal de formulario */
+  .overlay {
+    position:fixed; inset:0;
+    background:rgba(90,50,66,.35);
+    backdrop-filter:blur(3px);
+    display:flex; align-items:center; justify-content:center;
+    z-index:60;
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+    padding:20px;
+  }
+  .overlay.show { opacity:1; pointer-events:auto; }
+
+  .order-modal {
+    position:relative;
+    background:#fff;
+    border-radius:26px;
+    padding:36px 32px;
+    max-width:420px;
+    width:100%;
+    box-shadow:0 30px 70px -20px rgba(90,50,66,.5);
+    transform:scale(.92);
+    transition:transform .3s cubic-bezier(.2,.8,.3,1.2);
+    max-height:88vh;
+    overflow-y:auto;
+  }
+  .overlay.show .order-modal { transform:scale(1); }
+
+  .modal-close {
+    position:absolute;
+    top:16px; right:16px;
+    border:none;
+    background:var(--pink-050);
+    color:var(--pink-900);
+    width:32px; height:32px;
+    border-radius:50%;
+    font-size:18px;
+    cursor:pointer;
+    line-height:1;
+  }
+  .modal-close:hover { background:var(--pink-100); }
+
+  .winner-eyebrow {
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--pink-700);
+    font-weight:700;
+    margin:0 0 8px;
+  }
+  .modal-title {
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:26px;
+    color:var(--pink-900);
+    margin:0 0 8px;
+  }
+  .modal-hint {
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+    line-height:1.5;
+  }
+
+  .order-form {
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .field-row {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  @media (max-width: 380px) {
+    .field-row { grid-template-columns:1fr; }
+  }
+  .field {
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .field label {
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--pink-900);
+  }
+  .field input, .field textarea {
+    border:2px solid var(--pink-100);
+    border-radius:12px;
+    padding:10px 12px;
+    font-family:'Quicksand', sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink);
+    background:var(--pink-050);
+    outline:none;
+    transition:border-color .15s ease;
+    resize:vertical;
+  }
+  .field input:focus, .field textarea:focus { border-color:var(--pink-500); }
+
+  .order-submit-btn {
+    border:none;
+    background:linear-gradient(135deg, var(--pink-700), var(--pink-900));
+    color:#fff;
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    padding:13px;
+    border-radius:999px;
+    cursor:pointer;
+    margin-top:4px;
+    transition:transform .15s ease;
+  }
+  .order-submit-btn:hover { transform:translateY(-1px); }
+
+  .modal-note {
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:10px 0 0;
   }
 
 </style>
@@ -264,6 +448,14 @@
     <h1>Nuestros productos</h1>
     <p class="subtitle">Jabones, perfumes y exfoliantes elaborados con ingredientes químicos y naturales, hechos con dedicación.</p>
   </header>
+
+  <!-- SECCIÓN "BUSCÁS ALGO DIFERENTE" AGREGADA AQUÍ -->
+  <div class="order-banner">
+    <h2 class="order-banner-title">¿Buscás algo diferente?</h2>
+    <p class="order-banner-text">Escribinos directamente a nuestro WhatsApp y contanos qué necesitás.</p>
+    <a href="https://wa.me/50377477887" class="order-btn" target="_blank">Contactar al 7747 7887</a>
+    <a href="https://wa.me/50371521127" class="order-btn" target="_blank">Contactar al 7152 1127</a>
+  </div>
 
   <div class="filters" id="filters">
     <button class="filter-btn active" data-filter="all">Todos</button>
@@ -358,7 +550,7 @@
             <p class="card-desc">Dulce y envolvente.</p>
           </div>
         </article>
-        <article class="card">
+        <article class="card order-card" id="orderCard">
           <div class="card-image">
             <img src="perfume-encargo.jpg" alt="Perfume por encargo" onerror="this.replaceWith(placeholderIcon())">
             <span class="badge">Por encargo</span>
@@ -366,6 +558,7 @@
           <div class="card-body">
             <h3 class="card-name">Por encargo</h3>
             <p class="card-desc">Fragancia personalizada según tu preferencia.</p>
+            <button class="card-order-btn" id="openOrderFormCard">Pedir ahora</button>
           </div>
         </article>
       </div>
@@ -429,14 +622,82 @@
           <span class="badge">Natural</span>
         </div>
         <div class="card-body">
-          <h3 class="card-name">Crema neutral</h3>
+          <h3 class="card-name">Crema natura</h3>
           <p class="card-desc">Café, avena y azúcar.</p>
         </div>
       </article>
     </div>
   </section>
-
 </div>
+
+<div class="overlay" id="orderOverlay">
+  <div class="order-modal">
+    <button class="modal-close" id="closeOrderForm" aria-label="Cerrar">×</button>
+    <p class="winner-eyebrow">Pedido por encargo</p>
+    <h3 class="modal-title">Contanos qué necesitás</h3>
+    <p class="modal-hint">Se puede pedir cualquier producto por encargo, ¡especialmente los perfumes!</p>
+
+    <form id="orderForm" class="order-form">
+      <div class="field-row">
+        <div class="field">
+          <label for="ofNombre">Nombre</label>
+          <input type="text" id="ofNombre" required>
+        </div>
+        <div class="field">
+          <label for="ofApellido">Apellido</label>
+          <input type="text" id="ofApellido" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="ofContacto">Teléfono o correo</label>
+        <input type="text" id="ofContacto" placeholder="Ej: 7000-0000 o tucorreo@ejemplo.com" required>
+      </div>
+      <div class="field">
+        <label for="ofPedido">¿Qué querés ordenar?</label>
+        <textarea id="ofPedido" rows="4" placeholder="Ej: Perfume de rosas, 100ml" required></textarea>
+      </div>
+      <button type="submit" class="order-submit-btn">Enviar pedido</button>
+      <p class="modal-note">Se abrirá tu app de correo con el pedido ya redactado, listo para enviar.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  const overlay = document.getElementById('orderOverlay');
+  const openBtns = [document.getElementById('openOrderForm'), document.getElementById('openOrderFormCard')];
+  const closeBtn = document.getElementById('closeOrderForm');
+  const form = document.getElementById('orderForm');
+  const DEST_EMAIL = 'rodrigocristales@gmail.com';
+
+  function openOverlay(){ overlay.classList.add('show'); }
+  function closeOverlay(){ overlay.classList.remove('show'); }
+
+  openBtns.forEach(btn=>{
+    if(btn) btn.addEventListener('click', openOverlay);
+  });
+  closeBtn.addEventListener('click', closeOverlay);
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeOverlay(); });
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const nombre = document.getElementById('ofNombre').value.trim();
+    const apellido = document.getElementById('ofApellido').value.trim();
+    const contacto = document.getElementById('ofContacto').value.trim();
+    const pedido = document.getElementById('ofPedido').value.trim();
+
+    const subject = encodeURIComponent(`Pedido por encargo - ${nombre} ${apellido}`);
+    const body = encodeURIComponent(
+      `Nombre: ${nombre}\n` +
+      `Apellido: ${apellido}\n` +
+      `Teléfono o correo: ${contacto}\n\n` +
+      `Pedido:\n${pedido}`
+    );
+
+    window.location.href = `mailto:${DEST_EMAIL}?subject=${subject}&body=${body}`;
+  });
+})();
+</script>
 
 <script>
   function placeholderIcon(){
