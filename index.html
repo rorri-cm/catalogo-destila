@@ -291,24 +291,6 @@
     padding:28px 20px;
   }
 
-  /* Card de "por encargo" con botón propio */
-  .order-card .card-body { gap:10px; }
-  .card-order-btn {
-    border:none;
-    background:var(--pink-700);
-    color:#fff;
-    font-family:'Quicksand', sans-serif;
-    font-weight:700;
-    font-size:13px;
-    padding:9px 16px;
-    border-radius:999px;
-    cursor:pointer;
-    align-self:flex-start;
-    margin-top:4px;
-    transition:background .15s ease;
-  }
-  .card-order-btn:hover { background:var(--pink-900); }
-
   /* Modal de formulario */
   .overlay {
     position:fixed; inset:0;
@@ -449,12 +431,11 @@
     <p class="subtitle">Jabones, perfumes y exfoliantes elaborados con ingredientes químicos y naturales, hechos con dedicación.</p>
   </header>
 
-  <!-- SECCIÓN "BUSCÁS ALGO DIFERENTE" AGREGADA AQUÍ -->
   <div class="order-banner">
     <h2 class="order-banner-title">¿Buscás algo diferente?</h2>
-    <p class="order-banner-text">Escribinos directamente a nuestro WhatsApp y contanos qué necesitás.</p>
+    <p class="order-banner-text">Escribinos directamente y contanos qué necesitás.</p>
     <a href="https://wa.me/50377477887" class="order-btn" target="_blank">Contactar al 7747 7887</a>
-    <a href="https://wa.me/50371521127" class="order-btn" target="_blank">Contactar al 7152 1127</a>
+    <button class="order-btn" id="openOrderFormBanner">Realizar pedido por email</button>
   </div>
 
   <div class="filters" id="filters">
@@ -548,17 +529,6 @@
           <div class="card-body">
             <h3 class="card-name">Cloud</h3>
             <p class="card-desc">Dulce y envolvente.</p>
-          </div>
-        </article>
-        <article class="card order-card" id="orderCard">
-          <div class="card-image">
-            <img src="perfume-encargo.jpg" alt="Perfume por encargo" onerror="this.replaceWith(placeholderIcon())">
-            <span class="badge">Por encargo</span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-name">Por encargo</h3>
-            <p class="card-desc">Fragancia personalizada según tu preferencia.</p>
-            <button class="card-order-btn" id="openOrderFormCard">Pedir ahora</button>
           </div>
         </article>
       </div>
@@ -665,7 +635,7 @@
 <script>
 (function(){
   const overlay = document.getElementById('orderOverlay');
-  const openBtns = [document.getElementById('openOrderForm'), document.getElementById('openOrderFormCard')];
+  const openBtns = [document.getElementById('openOrderFormBanner')];
   const closeBtn = document.getElementById('closeOrderForm');
   const form = document.getElementById('orderForm');
   const DEST_EMAIL = 'rodrigocristales@gmail.com';
